@@ -13,10 +13,9 @@
 __author__ = 'JHao'
 
 from getFreeProxy import GetFreeProxy
-from Util.utilFunction import verifyProxyFormat
-
 
 from Util.LogHandler import LogHandler
+from Util.utilFunction import verifyProxyFormat
 
 log = LogHandler('check_proxy', file=False)
 
@@ -33,17 +32,21 @@ class CheckProxy(object):
         import inspect
         member_list = inspect.getmembers(GetFreeProxy, predicate=inspect.isfunction)
         proxy_count_dict = dict()
+        proxy_list_dict = dict()
         for func_name, func in member_list:
             log.info(u"开始运行 {}".format(func_name))
             try:
                 proxy_list = [_ for _ in func() if verifyProxyFormat(_)]
                 proxy_count_dict[func_name] = len(proxy_list)
+                proxy_list_dict[func_name] = proxy_list
             except Exception as e:
                 log.info(u"代理获取函数 {} 运行出错!".format(func_name))
                 log.error(str(e))
         log.info(u"所有函数运行完毕 " + "***" * 5)
         for func_name, func in member_list:
             log.info(u"函数 {n}, 获取到代理数: {c}".format(n=func_name, c=proxy_count_dict.get(func_name, 0)))
+        for func_name, pl in proxy_list_dict:
+            log.info(u"good proxy:", pl)
 
     @staticmethod
     def checkGetProxyFunc(func):
