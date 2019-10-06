@@ -48,7 +48,7 @@ class CheckProxy(object):
 
         log.info(u"good proxy:")
         for func_name, pl in proxy_list_dict:
-            print(pl[0])
+            print(proxy_list_dict[func_name])
     @staticmethod
     def checkGetProxyFunc(func):
         """
