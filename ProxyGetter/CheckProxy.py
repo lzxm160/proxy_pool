@@ -47,8 +47,10 @@ class CheckProxy(object):
             log.info(u"函数 {n}, 获取到代理数: {c}".format(n=func_name, c=proxy_count_dict.get(func_name, 0)))
 
         log.info(u"good proxy:")
-        for func_name, pl in proxy_list_dict:
-            print(proxy_list_dict[func_name])
+        # for func_name, pl in proxy_list_dict:
+        #     print(proxy_list_dict[func_name])
+        for key, value in proxy_list_dict.items():
+            print("Key: {}\nValue: {}\n\n".format(key, value))
     @staticmethod
     def checkGetProxyFunc(func):
         """
